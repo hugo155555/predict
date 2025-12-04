@@ -2,20 +2,23 @@
     "name": "predict",
     "version": "1.0.0",
     "description": "",
-    "main": "server.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
     "repository": {
         "type": "git"
     },
-    "author": "Iren Lorenzo Fonseca",
     "license": "ISC",
-    "bugs": {
+    "author": "Iren Lorenzo Fonseca",
+    "type": "commonjs",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
     },
     "dependencies": {
         "@tensorflow/tfjs": "^4.22.0",
         "@tensorflow/tfjs-backend-wasm": "^4.22.0",
-        "express": "^5.1.0"
+        "express": "^5.2.1",
+        "mongodb": "^7.0.0",
+        "mongoose": "^9.0.0",
+        "dotenv": "^17.2.3"
     }
 }

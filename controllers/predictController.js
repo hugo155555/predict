@@ -1,5 +1,6 @@
 // controllers/predictController.js
 const { getModelInfo, predict } = require("../services/tfModelService");
+const Prediccion=require("../models/prediction")
 
 function health(req, res) {
   res.json({
@@ -63,10 +64,24 @@ async function doPredict(req, res) {
     const prediction = await predict(features);
     const latencyMs = Date.now() - start;
     const timestamp = new Date().toISOString();
+     
+    const prediccion = await Prediccion.create({
+      features,
+      prediction,
+      timestamp,
+      latencyMs,
+      meta
+    })
 
-    // De momento sin MongoDB → predictionId null
+// --- ZONA DE DEPURACIÓN (CHIVATOS) ---
+    console.log("--------------------------------------------------");
+    console.log("1. Resultado numérico (prediction):", prediction);
+    console.log("2. Objeto guardado en BD (prediccion):", prediccion);
+    console.log("3. ID que vamos a enviar:", prediccion._id);
+    console.log("--------------------------------------------------");
+
     res.status(201).json({
-      predictionId: null,
+      predictionId: prediccion._id,
       prediction,
       timestamp,
       latencyMs
